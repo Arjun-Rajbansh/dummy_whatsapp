@@ -2,8 +2,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    //double orjWidth = MediaQuery.of(context).size.width;
+    double cameraWidth = 5; //orjWidth / 24;
+    double yourWidth = 60;//(orjWidth - cameraWidth) / 5;
+
+    return MaterialApp(
       home: DefaultTabController(
         length: 4,
         child: Scaffold(
@@ -34,18 +53,35 @@ void main() {
               ),
             ],
             bottom: TabBar(
-              tabs: [
-                Container(
-                  width: 30,
-                  child: Tab(
-                    child: Icon(Icons.camera_alt),
+                //controller: _tabController,
+                indicatorColor: Colors.white,
+                labelPadding: EdgeInsets.symmetric(
+                    horizontal: 20),//(orjWidth - (cameraWidth + yourWidth * 3)) / 8),
+                isScrollable: true,
+                tabs: [
+                  Container(
+                    child: Tab(icon: Icon(Icons.camera_alt)),
+                    width: cameraWidth,
                   ),
-                ),
-                Tab(text: 'CHATS'),
-                Tab(text: 'STATUS'),
-                Tab(text: 'CALLS'),
-              ],
-            ),
+                  Container(
+                    child: Tab(
+                      text: "CHATS",
+                    ),
+                    width: yourWidth,
+                  ),
+                  Container(
+                    child: Tab(
+                      text: "STATUS",
+                    ),
+                    width: yourWidth,
+                  ),
+                  Container(
+                    child: Tab(
+                      text: "CALL",
+                    ),
+                    width: yourWidth,
+                  ),
+                ]),
           ),
           body: TabBarView(
             children: [
@@ -148,6 +184,6 @@ void main() {
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
